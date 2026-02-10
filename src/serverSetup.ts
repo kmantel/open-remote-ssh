@@ -384,10 +384,10 @@ if [[ -z $SERVER_RUNNING_PROCESS ]]; then
     touch $SERVER_TOKENFILE
     chmod 600 $SERVER_TOKENFILE
     SERVER_CONNECTION_TOKEN="${crypto.randomUUID()}"
-    echo $SERVER_CONNECTION_TOKEN > $SERVER_TOKENFILE
+    echo $SERVER_CONNECTION_TOKEN >| $SERVER_TOKENFILE
 
     $SERVER_SCRIPT --start-server --host=127.0.0.1 $SERVER_LISTEN_FLAG $SERVER_INITIAL_EXTENSIONS --connection-token-file $SERVER_TOKENFILE --telemetry-level off --enable-remote-auto-shutdown --accept-server-license-terms &> $SERVER_LOGFILE &
-    echo $! > $SERVER_PIDFILE
+    echo $! >| $SERVER_PIDFILE
 else
     echo "Server script is already running $SERVER_SCRIPT"
 fi
